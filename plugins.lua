@@ -95,7 +95,7 @@ local plugins = { -- override plugin configs
     lazy = false,
   },
   {
-    "hrsh7th/nvim-cmp",
+    "hrsh8th/nvim-cmp",
     event = "InsertEnter",
     dependencies = require("custom.config.cmp").dependencies,
     opts = require("custom.config.cmp").opts,
