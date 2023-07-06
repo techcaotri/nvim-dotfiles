@@ -95,7 +95,7 @@ local plugins = { -- override plugin configs
     lazy = false,
   },
   {
-    "hrsh8th/nvim-cmp",
+    "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = require("custom.config.cmp").dependencies,
     opts = require("custom.config.cmp").opts,
@@ -120,6 +120,113 @@ local plugins = { -- override plugin configs
       -- or you can just copy-paste the config here.
     end,
   },
+  -- {
+  --   "olimorris/persisted.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("persisted").setup({ autoload = true })
+  --     require("telescope").load_extension("persisted") -- To load the telescope extension
+  --   end,
+  -- },
+  {
+    'jedrzejboczar/possession.nvim',
+    lazy = false,
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("possession").setup {
+        autosave = {
+          current = true,   -- or fun(name): boolean
+          tmp = true,       -- or fun(): boolean
+          tmp_name = 'tmp', -- or fun(): string
+          on_load = true,
+          on_quit = true,
+        },
+        plugins = {
+          close_windows = {
+            preserve_layout = true, -- or fun(win): boolean
+            match = {
+              floating = true,
+              buftype = {
+                'terminal',
+              },
+              filetype = {},
+              custom = false, -- or fun(win): boolean
+            },
+          },
+          delete_hidden_buffers = false,
+          nvim_tree = true,
+          -- tabby = true,
+          delete_buffers = false,
+        },
+      }
+      require('telescope').load_extension('possession')
+    end,
+  },
+  { -- lazy.nvim
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      dashboard.section.buttons.val = {
+        dashboard.button("f", " " .. " Find Files", ":Telescope find_files<cr>"),
+        dashboard.button("e", " " .. " New Files", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("o", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
+        dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
+        dashboard.button("c", " " .. " Nvim Dev", [[<cmd>PossessionLoad Dev<CR>]]),
+        dashboard.button("z", "鈴" .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        (function()
+          local group = { type = "group", opts = { spacing = 0 } }
+          group.val = {
+            {
+              type = "text",
+              val = "Sessions",
+              opts = {
+                position = "center"
+              }
+            }
+          }
+          local path = vim.fn.stdpath("data") .. "/possession"
+          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
+          for i, file in pairs(files) do
+            local basename = vim.fs.basename(file):gsub("%.json", "")
+            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            table.insert(group.val, button)
+          end
+          return group
+        end)()
+      }
+      dashboard.opts.layout[1].val = 8
+      return dashboard
+    end,
+    config = function(_, dashboard)
+      require("alpha").setup(dashboard.opts)
+    end,
+  },
+  {
+    "Pocco81/auto-save.nvim",
+    lazy = false,
+    config = function()
+      require("auto-save").setup {
+        trigger_events = { "InsertLeave", "TextChanged" }, -- vim events that trigger auto-save. See :h events
+        -- your config goes here
+        debounce_delay = 1500,
+        condition = function(buf)
+          local fn = vim.fn
+          local undotree = vim.fn.undotree()
+          if undotree.seq_last ~= undotree.seq_cur then
+            return false -- don't try to save again if I tried to undo. k thanks
+          end
+        end
+      }
+    end,
+  },
+  { "folke/neodev.nvim", opts = {} },
+  {
+    "mbbill/undotree",
+    lazy = false,
+  },
+
   -- {
   -- "jose-elias-alvarez/null-ls.nvim",
   -- ft = require("custom.config.null-ls").filetype,
@@ -175,6 +282,28 @@ local plugins = { -- override plugin configs
   --   "mg979/vim-visual-multi",
   --   lazy = false,
   -- }
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    init = function()
+      require("core.utils").lazy_load "indent-blankline.nvim"
+    end,
+    opts = function()
+      return require("custom.config.indent-blankline").blankline
+    end,
+    config = function(_, opts)
+      require("core.utils").load_mappings "blankline"
+      dofile(vim.g.base46_cache .. "blankline")
+      require("indent_blankline").setup(opts)
+    end,
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
 }
 
 return plugins

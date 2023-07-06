@@ -8,7 +8,7 @@ M.dependencies = {
 M.mason_opts = {
   ensure_installed = {
     "lua-language-server",
-
+    "ccls",
     "clangd",
     "neocmakelsp",
 
@@ -93,6 +93,7 @@ function M.config()
   local util = require("lspconfig/util")
 
   local servers = {
+    "ccls",
     "clangd",
     "bashls",
     "jedi_language_server",
@@ -160,6 +161,15 @@ function M.config()
         },
       },
     },
+  })
+
+  lspconfig.ccls.setup({
+    init_options = {
+      compilationDatabaseDirectory = "build",
+      index = {
+        threads = 0,
+      },
+    }
   })
 
   require("fidget").setup({
