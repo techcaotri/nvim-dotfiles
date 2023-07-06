@@ -49,4 +49,20 @@ M.undotree = {
   }
 }
 
+M.possession = {
+  n = {
+    ["<leader>ss"] = {
+      function()
+        local possession_name = vim.fn.input("PossessionSave name, use 'tmp' if empty: ")
+        local possession = require("possession")
+        if possession_name == nil or possession_name == "" then
+          possession_name = "tmp"
+        end
+        possession.save(possession_name)
+      end,
+      "Save session with prompt" },
+
+  }
+}
+
 return M
