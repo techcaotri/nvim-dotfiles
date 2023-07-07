@@ -1,12 +1,12 @@
 local enable_providers = {
-    "python3_provider",
-    "node_provider",
-    -- and so on
-  }
-  
+  "python3_provider",
+  "node_provider",
+  -- and so on
+}
+
 for _, plugin in pairs(enable_providers) do
-    vim.g["loaded_" .. plugin] = nil
-    vim.cmd("runtime " .. plugin)
+  vim.g["loaded_" .. plugin] = nil
+  vim.cmd("runtime " .. plugin)
 end
 
 local links = {
@@ -29,3 +29,5 @@ local links = {
 for newgroup, oldgroup in pairs(links) do
   vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
 end
+
+vim.wo.relativenumber = true

@@ -210,7 +210,7 @@ local plugins = { -- override plugin configs
       require("auto-save").setup {
         trigger_events = { "InsertLeave", "TextChanged" }, -- vim events that trigger auto-save. See :h events
         -- your config goes here
-        debounce_delay = 1500,
+        debounce_delay = 1000,
         condition = function(buf)
           local fn = vim.fn
           local undotree = vim.fn.undotree()
@@ -221,12 +221,43 @@ local plugins = { -- override plugin configs
       }
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    init = function()
+      require("core.utils").lazy_load "indent-blankline.nvim"
+    end,
+    opts = function()
+      return require("custom.config.indent-blankline").blankline
+    end,
+    config = function(_, opts)
+      require("core.utils").load_mappings "blankline"
+      dofile(vim.g.base45_cache .. "blankline")
+      require("indent_blankline").setup(opts)
+    end,
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
   { "folke/neodev.nvim", opts = {} },
   {
     "mbbill/undotree",
     lazy = false,
   },
-
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
   -- {
   -- "jose-elias-alvarez/null-ls.nvim",
   -- ft = require("custom.config.null-ls").filetype,
@@ -282,28 +313,6 @@ local plugins = { -- override plugin configs
   --   "mg979/vim-visual-multi",
   --   lazy = false,
   -- }
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    init = function()
-      require("core.utils").lazy_load "indent-blankline.nvim"
-    end,
-    opts = function()
-      return require("custom.config.indent-blankline").blankline
-    end,
-    config = function(_, opts)
-      require("core.utils").load_mappings "blankline"
-      dofile(vim.g.base46_cache .. "blankline")
-      require("indent_blankline").setup(opts)
-    end,
-  },
-  {
-    "kdheepak/lazygit.nvim",
-    -- optional for floating window border decoration
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
 }
 
 return plugins
