@@ -65,4 +65,23 @@ M.possession = {
   }
 }
 
+M.move = {
+  n = {
+    ["<A-j>"] = { ":MoveLine(1)<CR>", "Move line down" },
+    ["<A-k>"] = { ":MoveLine(-1)<CR>", "Move line up" },
+    ["<A-h>"] = { ":MoveHChar(-1)<CR>", "Move char left" },
+    ["<A-l>"] = { ":MoveHChar(1)<CR>", "Move char right" },
+
+    ["<leader>wf"] = { ":MoveWord(1)<CR>", "Move [W]ord [F]orward" },
+    ["<leader>wb"] = { ":MoveWord(-1)<CR>", "Move [W]ord [B]ackward" },
+  },
+
+  v = {
+    ["<A-j>"] = { ":MoveBlock(1)<CR>", "Move block down" },
+    ["<A-k>"] = { ":MoveBlock(-1)<CR>", "Move block up" },
+    ["<A-h>"] = { ":MoveBlock(-1)<CR>", "Move block left" },
+    ["<A-l>"] = { ":MoveBlock(1)<CR>", "Move block right" },
+  },
+
+}
 return M

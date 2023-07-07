@@ -259,6 +259,10 @@ local plugins = { -- override plugin configs
       })
     end
   },
+  {
+    "fedepujol/move.nvim",
+    lazy = false,
+  },
   -- {
   -- "jose-elias-alvarez/null-ls.nvim",
   -- ft = require("custom.config.null-ls").filetype,
