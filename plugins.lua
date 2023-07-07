@@ -173,7 +173,7 @@ local plugins = { -- override plugin configs
         dashboard.button("o", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Nvim Dev", [[<cmd>PossessionLoad Dev<CR>]]),
-        dashboard.button("z", "   " .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("z", " " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         (function()
           local group = { type = "group", opts = { spacing = 0 } }
