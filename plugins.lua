@@ -173,7 +173,7 @@ local plugins = { -- override plugin configs
         dashboard.button("o", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Nvim Dev", [[<cmd>PossessionLoad Dev<CR>]]),
-        dashboard.button("z", "鈴" .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("z", "   " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         (function()
           local group = { type = "group", opts = { spacing = 0 } }
@@ -190,7 +190,8 @@ local plugins = { -- override plugin configs
           local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
           for i, file in pairs(files) do
             local basename = vim.fs.basename(file):gsub("%.json", "")
-            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            local button = dashboard.button(tostring(i), "  " .. basename,
+              "<cmd>PossessionLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
           end
           return group
@@ -210,7 +211,7 @@ local plugins = { -- override plugin configs
       require("auto-save").setup {
         trigger_events = { "InsertLeave", "TextChanged" }, -- vim events that trigger auto-save. See :h events
         -- your config goes here
-        debounce_delay = 1000,
+        debounce_delay = 1500,
         condition = function(buf)
           local fn = vim.fn
           local undotree = vim.fn.undotree()
