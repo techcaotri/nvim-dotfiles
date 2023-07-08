@@ -232,7 +232,9 @@ local plugins = { -- override plugin configs
     end,
     config = function(_, opts)
       require("core.utils").load_mappings "blankline"
-      dofile(vim.g.base45_cache .. "blankline")
+      if vim.g.base45_cache ~= nil then
+        dofile(vim.g.base45_cache .. "blankline")
+      end
       require("indent_blankline").setup(opts)
     end,
   },
