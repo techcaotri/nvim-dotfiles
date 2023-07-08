@@ -1,12 +1,13 @@
 local M = {}
 
 -- In order to disable a default keymap, use
--- M.disabled = {
---   n = {
---       ["<leader>h"] = "",
---       ["<C-a>"] = ""
---   }
--- }
+M.disabled = {
+  n = {
+    -- ["<leader>h"] = "",
+    -- ["<C-a>"] = ""
+    ["<C-S-n>"] = ""
+  }
+}
 
 -- Your custom mappings
 M.nvimtree = {
@@ -84,4 +85,11 @@ M.move = {
   },
 
 }
+
+M.format = {
+  v = {
+    ["<leader>f"] = { vim.lsp.buf.format, "[F]ormat selection" },
+  },
+}
+
 return M
