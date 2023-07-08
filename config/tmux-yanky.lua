@@ -60,8 +60,8 @@ if status then
     which_key.show('"', { mode = "v", auto = true })
   end)
 end
-vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
-vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+vim.keymap.set("n", "<c-a-n>", "<Plug>(YankyCycleForward)")
+vim.keymap.set("n", "<c-a-p>", "<Plug>(YankyCycleBackward)")
 vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
 vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
 vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")

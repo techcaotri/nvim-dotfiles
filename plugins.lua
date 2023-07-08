@@ -106,6 +106,15 @@ local plugins = { -- override plugin configs
     dependencies = require("custom.config.copilot").dependencies,
   },
   {
+    'mg979/vim-visual-multi',
+    lazy = false,
+  },
+  {
+    'gbprod/yanky.nvim',
+    lazy = false,
+    after = 'vim-visual-multi',
+  },
+  {
     "aserowy/tmux.nvim",
     event = "VeryLazy",
     dependencies = {
