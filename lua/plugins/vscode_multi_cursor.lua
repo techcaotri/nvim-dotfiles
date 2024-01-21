@@ -10,4 +10,5 @@ return {
     end)
 
     require('vscode-multi-cursor').setup()
-
+  end
+}
