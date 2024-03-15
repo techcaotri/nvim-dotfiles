@@ -10,3 +10,4 @@ if not vim.g.vscode then
 end
 vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
 vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")
+vim.keymap.set("n", "<Leader>n", "<Cmd> Neorg <CR>", { desc = "Neorg" })
