@@ -1,6 +1,13 @@
 return {
   -- image preview
   {
+    {
+      "vhyrro/luarocks.nvim",
+      priority = 1001,
+      opts = {
+        rocks = { "magick" },
+      },
+    },
     "3rd/image.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -41,4 +48,3 @@ return {
     },
   },
 }
-
