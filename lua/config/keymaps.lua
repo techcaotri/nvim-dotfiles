@@ -122,6 +122,13 @@ local leader_mappings = {
     name = "+Buffer",
     ["N"] = { ":enew<CR>", "New buffer" },
     ["c"] = { ":let @+=expand('%:p')<CR>", "[c]opy absolute path to clipboard" },
+    f = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Delete Buffers to the Left" },
+    l = {
+      "<cmd>BufferLineCloseRight<cr>",
+      "Delete Buffers to the Right",
+    },
+    r = {},
   },
 
   -- Debug keymaps
@@ -259,6 +266,3 @@ vim.api.nvim_set_keymap('v', '<space><C-t>', '', {
   silent = true,
   desc = 'Translate to EN'
 })
-
-
-
