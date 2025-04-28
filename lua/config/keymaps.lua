@@ -122,6 +122,13 @@ local leader_mappings = {
     name = "+Buffer",
     ["N"] = { ":enew<CR>", "New buffer" },
     ["c"] = { ":let @+=expand('%:p')<CR>", "[c]opy absolute path to clipboard" },
+    f = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Delete Buffers to the Left" },
+    l = {
+      "<cmd>BufferLineCloseRight<cr>",
+      "Delete Buffers to the Right",
+    },
+    r = {},
   },
 
   -- Debug keymaps
@@ -230,9 +237,11 @@ local leader_mappings = {
   ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer, +code" },
 }
 
-local which_key = require "which-key"
-which_key.register(mappings, opts)
-which_key.register(leader_mappings, leader_mappings_opts)
+if not vim.g.vscode then
+  local which_key = require "which-key"
+  which_key.register(mappings, opts)
+  which_key.register(leader_mappings, leader_mappings_opts)
+end
 
 -- Add smart semicolon ';' keymap (<C-S-;>) in insert mode
 vim.api.nvim_set_keymap('i', '<M-j>', '<Esc><Esc>A;<ESC>a', { noremap = true, silent = true, desc = 'Smart semicolon' })
@@ -259,6 +268,3 @@ vim.api.nvim_set_keymap('v', '<space><C-t>', '', {
   silent = true,
   desc = 'Translate to EN'
 })
-
-
-
