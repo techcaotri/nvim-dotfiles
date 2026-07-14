@@ -3,8 +3,8 @@
 -- Add any additional options here
 
 -- image.nvim
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+-- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+-- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
 if not vim.g.vscode then
   require('java').setup({
@@ -18,23 +18,23 @@ if not vim.g.vscode then
       'build.gradle',
       'build.gradle.kts'
     },
-    jdtls = {
-      version = 'v1.52.0',
-    }
+    -- jdtls = {
+    --   version = 'v1.52.0',
+    -- }
   })
 
-  require('lspconfig').jdtls.setup {
-    -- ... other jdtls configurations ...
-    root_dir = require('lspconfig.util').root_pattern(
-      'settings.gradle',
-      'settings.gradle.kts',
-      'pom.xml',
-      'build.gradle',
-      'mvnw',
-      'gradlew',
-      'build.gradle',
-      'build.gradle.kts'
-    ),
-    -- ...
-  }
+  -- vim.lsp.config.jdtls.setup {
+  --   -- ... other jdtls configurations ...
+  --   root_dir = require('lspconfig.util').root_pattern(
+  --     'settings.gradle',
+  --     'settings.gradle.kts',
+  --     'pom.xml',
+  --     'build.gradle',
+  --     'mvnw',
+  --     'gradlew',
+  --     'build.gradle',
+  --     'build.gradle.kts'
+  --   ),
+  --   -- ...
+  -- }
 end
