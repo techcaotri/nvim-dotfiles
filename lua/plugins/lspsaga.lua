@@ -2,7 +2,7 @@ return {
     {
     'nvimdev/lspsaga.nvim',
     -- 'lspsaga.nvim',
-    -- dir = '/home/tripham/Dev/Playground_Terminal/Neovim_Awesome/lspsaga.nvim',
+    -- dir = '/Users/tripham/Dev/Playground_Terminal/Neovim_Awesome/lspsaga.nvim',
     after = 'nvim-lspconfig',
     config = function()
       require('lspsaga').setup({
